@@ -1,0 +1,78 @@
+[gd_scene load_steps=2 format=3 uid="uid://du338acf67bx4"]
+
+[ext_resource type="Script" path="res://scripts/enemy_spawner.gd" id="1_fq55d"]
+
+[node name="EnemySpawner" type="Node2D"]
+script = ExtResource("1_fq55d")
+
+[node name="SpawnPositions" type="Node2D" parent="."]
+
+[node name="Spawn_01" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(1050, 50)
+
+[node name="Spawn_02" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(1050, 200)
+
+[node name="Spawn_03" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(1050, 350)
+
+[node name="Spawn_04" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(1050, 500)
+
+[node name="Spawn_05" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(1050, 650)
+
+[node name="Spawn_06" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(926, 817)
+
+[node name="Spawn_07" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(716, 824)
+
+[node name="Spawn_08" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(514, 825)
+
+[node name="Spawn_09" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(328, 826)
+
+[node name="Spawn_10" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(103, 830)
+
+[node name="Spawn_11" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(-50, 682)
+
+[node name="Spawn_17" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(-41, 800)
+
+[node name="Spawn_12" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(-47, 555)
+
+[node name="Spawn_13" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(-50, 425)
+
+[node name="Spawn_14" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(-48, 285)
+
+[node name="Spawn_15" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(-52, 119)
+
+[node name="Spawn_16" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(-30, -38)
+
+[node name="Spawn_18" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(147, -49)
+
+[node name="Spawn_19" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(360, -46)
+
+[node name="Spawn_20" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(829, -50)
+
+[node name="Spawn_22" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(590, -44)
+
+[node name="Spawn_21" type="Marker2D" parent="SpawnPositions"]
+position = Vector2(1008, -41)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true

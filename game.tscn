@@ -1,0 +1,133 @@
+[gd_scene load_steps=16 format=3 uid="uid://drkpa4garxc0c"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_g88vw"]
+[ext_resource type="PackedScene" uid="uid://b84wgsf6cbldt" path="res://scenes/hud.tscn" id="2_24mh8"]
+[ext_resource type="PackedScene" uid="uid://t7uhhpvi35vm" path="res://scenes/player.tscn" id="2_xejhs"]
+[ext_resource type="AudioStream" uid="uid://cdb7aqmeawkbr" path="res://sounds/gained_hp.wav" id="5_43562"]
+[ext_resource type="PackedScene" uid="uid://bst2m6ufj6k3x" path="res://scenes/meteor.tscn" id="6_0ccjg"]
+[ext_resource type="AudioStream" uid="uid://cvjvy1vbxj6vh" path="res://sounds/game_over.wav" id="6_0ft4g"]
+[ext_resource type="AudioStream" uid="uid://dg3paxilxrdmi" path="res://sounds/game_won.wav" id="6_667b6"]
+[ext_resource type="AudioStream" uid="uid://b7hf4wh2uxsuy" path="res://sounds/player_died.wav" id="7_2vgi4"]
+[ext_resource type="AudioStream" uid="uid://bgdikgkwrviln" path="res://sounds/enemy_hit.wav" id="7_t81fq"]
+[ext_resource type="PackedScene" uid="uid://dvb6s54tunhiv" path="res://scenes/item.tscn" id="8_i8btw"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_414i8"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 384, 1)
+particle_flag_disable_z = true
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = -120.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+
+[sub_resource type="Gradient" id="Gradient_18vhd"]
+offsets = PackedFloat32Array(0, 0.514793, 1)
+colors = PackedColorArray(0, 0, 0, 0.792157, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tfr06"]
+gradient = SubResource("Gradient_18vhd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qg7uv"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 384, 1)
+particle_flag_disable_z = true
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = -100.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 4.0
+scale_max = 4.0
+color_ramp = SubResource("GradientTexture1D_tfr06")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h4fnk"]
+radius = 84.0238
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_g88vw")
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="BackStars" type="GPUParticles2D" parent="Background"]
+position = Vector2(1024, 384)
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_414i8")
+lifetime = 100.0
+preprocess = 40.0
+
+[node name="MidStars" type="GPUParticles2D" parent="Background"]
+position = Vector2(0, 384)
+rotation = 3.14159
+amount = 60
+process_material = SubResource("ParticleProcessMaterial_qg7uv")
+lifetime = 50.0
+preprocess = 40.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="HUD" parent="UI" instance=ExtResource("2_24mh8")]
+offset_left = 3.0
+offset_top = 15.0
+offset_right = 298.0
+offset_bottom = 97.0
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="PlayerDied" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("7_2vgi4")
+
+[node name="HitEnemy" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("7_t81fq")
+volume_db = -15.0
+max_distance = 10000.0
+panning_strength = 2.0
+
+[node name="GainedHP" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("5_43562")
+volume_db = -5.0
+max_distance = 10000.0
+
+[node name="GameOver" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("6_0ft4g")
+
+[node name="LevelPassed" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("6_667b6")
+
+[node name="Meteors" type="Node" parent="."]
+
+[node name="Meteor_00" parent="Meteors" instance=ExtResource("6_0ccjg")]
+position = Vector2(535, 133)
+
+[node name="Meteor_01" parent="Meteors" instance=ExtResource("6_0ccjg")]
+position = Vector2(253, 567)
+
+[node name="Meteor_02" parent="Meteors" instance=ExtResource("6_0ccjg")]
+position = Vector2(805, 335)
+
+[node name="Meteor_03" parent="Meteors" instance=ExtResource("6_0ccjg")]
+position = Vector2(215, 304)
+
+[node name="Meteor_04" parent="Meteors" instance=ExtResource("6_0ccjg")]
+position = Vector2(729, 582)
+
+[node name="SpawnArea" type="Area2D" parent="."]
+position = Vector2(512, 384)
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea"]
+shape = SubResource("CircleShape2D_h4fnk")
+
+[node name="Player" parent="." instance=ExtResource("2_xejhs")]
+z_index = 10
+position = Vector2(512, 384)
+
+[node name="Item" parent="." instance=ExtResource("8_i8btw")]
+position = Vector2(900, 84)
+
+[connection signal="area_entered" from="SpawnArea" to="." method="_on_spawn_area_area_entered"]
+[connection signal="area_exited" from="SpawnArea" to="." method="_on_spawn_area_area_exited"]
+[connection signal="took_damage" from="Player" to="." method="_on_player_took_damage"]
+[connection signal="picked_up" from="Item" to="." method="_on_item_picked_up"]

@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://b84wgsf6cbldt"]
+
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_bla5y"]
+[ext_resource type="FontFile" uid="uid://ou8lg8en4ou2" path="res://assets/Kenney Blocks.ttf" id="1_vdtp4"]
+[ext_resource type="Texture2D" uid="uid://v4nc3jpovwe0" path="res://assets/ship_A.png" id="3_ue68h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g62k3"]
+font = ExtResource("1_vdtp4")
+font_size = 32
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_bla5y")
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 640.0
+offset_right = 264.0
+offset_bottom = 691.0
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_g62k3")
+
+[node name="LIVES" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Life_01" type="Sprite2D" parent="LIVES"]
+position = Vector2(32, 712)
+rotation = 3.14159
+texture = ExtResource("3_ue68h")
+
+[node name="Life_02" type="Sprite2D" parent="LIVES"]
+position = Vector2(80, 712)
+rotation = 3.14159
+texture = ExtResource("3_ue68h")
+
+[node name="Life_03" type="Sprite2D" parent="LIVES"]
+position = Vector2(128, 712)
+rotation = 3.14159
+texture = ExtResource("3_ue68h")

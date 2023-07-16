@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://8ldsqthr37xi"]
+
+[ext_resource type="Script" path="res://scripts/item_spawner.gd" id="1_kvxlb"]
+
+[sub_resource type="Curve2D" id="Curve2D_3fs6x"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1412, 822, 0, 0, 0, 0, 1192, 722, 12.5, 162.5, -12.5, -162.5, 975, 522, 398.75, 17.5, -398.75, -17.5, 457, 84, 0, 0, 0, 0, -160, 449)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_jei6o"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -132, 674, -566.25, 77.5, 566.25, -77.5, 470, 331, 0, 0, 0, 0, 1152, 586)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_kxhm4"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1131, 75, 646.25, -18.75, -646.25, 18.75, 557, 240, 0, 0, 0, 0, -62, 47)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_c80dp"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 96, 804, -286.25, 346.25, 286.25, -346.25, 394, 221, 0, 0, 0, 0, 877, -92)
+}
+point_count = 3
+
+[node name="ItemSpawner" type="Node2D"]
+script = ExtResource("1_kvxlb")
+
+[node name="Paths" type="Node" parent="."]
+
+[node name="Path_01" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_3fs6x")
+
+[node name="PathFollow" type="PathFollow2D" parent="Paths/Path_01"]
+position = Vector2(1412, 822)
+rotates = false
+loop = false
+
+[node name="Path_02" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_jei6o")
+
+[node name="PathFollow" type="PathFollow2D" parent="Paths/Path_02"]
+position = Vector2(-132, 674)
+rotates = false
+loop = false
+
+[node name="Path_03" type="Path2D" parent="Paths"]
+position = Vector2(-6, -19)
+curve = SubResource("Curve2D_kxhm4")
+
+[node name="PathFollow" type="PathFollow2D" parent="Paths/Path_03"]
+position = Vector2(1131, 75)
+rotates = false
+loop = false
+
+[node name="Path_04" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_c80dp")
+
+[node name="PathFollow" type="PathFollow2D" parent="Paths/Path_04"]
+position = Vector2(96, 804)
+rotates = false
+loop = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
