@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="Meteors"
+config/name="Star Dasher"
 run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+AudioPlayer="*res://scenes/audio_player.tscn"
 
 [display]
 

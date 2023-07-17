@@ -1,15 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://drkpa4garxc0c"]
+[gd_scene load_steps=15 format=3 uid="uid://drkpa4garxc0c"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_g88vw"]
 [ext_resource type="PackedScene" uid="uid://b84wgsf6cbldt" path="res://scenes/hud.tscn" id="2_24mh8"]
 [ext_resource type="PackedScene" uid="uid://t7uhhpvi35vm" path="res://scenes/player.tscn" id="2_xejhs"]
 [ext_resource type="AudioStream" uid="uid://cdb7aqmeawkbr" path="res://sounds/gained_hp.wav" id="5_43562"]
-[ext_resource type="PackedScene" uid="uid://bst2m6ufj6k3x" path="res://scenes/meteor.tscn" id="6_0ccjg"]
 [ext_resource type="AudioStream" uid="uid://cvjvy1vbxj6vh" path="res://sounds/game_over.wav" id="6_0ft4g"]
 [ext_resource type="AudioStream" uid="uid://dg3paxilxrdmi" path="res://sounds/game_won.wav" id="6_667b6"]
 [ext_resource type="AudioStream" uid="uid://b7hf4wh2uxsuy" path="res://sounds/player_died.wav" id="7_2vgi4"]
 [ext_resource type="AudioStream" uid="uid://bgdikgkwrviln" path="res://sounds/enemy_hit.wav" id="7_t81fq"]
-[ext_resource type="PackedScene" uid="uid://dvb6s54tunhiv" path="res://scenes/item.tscn" id="8_i8btw"]
+[ext_resource type="PackedScene" uid="uid://rnrl673y57qk" path="res://scenes/meteor_spawner.tscn" id="9_v6k00"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_414i8"]
 emission_shape = 3
@@ -96,23 +95,6 @@ stream = ExtResource("6_0ft4g")
 [node name="LevelPassed" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("6_667b6")
 
-[node name="Meteors" type="Node" parent="."]
-
-[node name="Meteor_00" parent="Meteors" instance=ExtResource("6_0ccjg")]
-position = Vector2(535, 133)
-
-[node name="Meteor_01" parent="Meteors" instance=ExtResource("6_0ccjg")]
-position = Vector2(253, 567)
-
-[node name="Meteor_02" parent="Meteors" instance=ExtResource("6_0ccjg")]
-position = Vector2(805, 335)
-
-[node name="Meteor_03" parent="Meteors" instance=ExtResource("6_0ccjg")]
-position = Vector2(215, 304)
-
-[node name="Meteor_04" parent="Meteors" instance=ExtResource("6_0ccjg")]
-position = Vector2(729, 582)
-
 [node name="SpawnArea" type="Area2D" parent="."]
 position = Vector2(512, 384)
 collision_mask = 4
@@ -124,10 +106,10 @@ shape = SubResource("CircleShape2D_h4fnk")
 z_index = 10
 position = Vector2(512, 384)
 
-[node name="Item" parent="." instance=ExtResource("8_i8btw")]
-position = Vector2(900, 84)
+[node name="MeteorSpawner" parent="." instance=ExtResource("9_v6k00")]
 
 [connection signal="area_entered" from="SpawnArea" to="." method="_on_spawn_area_area_entered"]
 [connection signal="area_exited" from="SpawnArea" to="." method="_on_spawn_area_area_exited"]
 [connection signal="took_damage" from="Player" to="." method="_on_player_took_damage"]
-[connection signal="picked_up" from="Item" to="." method="_on_item_picked_up"]
+
+[editable path="MeteorSpawner"]

@@ -11,7 +11,7 @@ signal took_damage
 
 var can_attack = true
 
-var lives = 3
+var lives = 1
 var rocket_scene = preload("res://scenes/rocket.tscn")
 var input_vector :Vector2
 
@@ -61,7 +61,6 @@ func take_damage():
 	emit_signal("took_damage")
 	
 func die():
-	print("player died")
 	queue_free()
 
 func respawn():
